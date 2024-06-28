@@ -1,0 +1,606 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 29, 2024 at 12:56 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `user_management_role_permission`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cache`
+--
+
+CREATE TABLE `cache` (
+  `key` varchar(255) NOT NULL,
+  `value` mediumtext NOT NULL,
+  `expiration` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cache_locks`
+--
+
+CREATE TABLE `cache_locks` (
+  `key` varchar(255) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `expiration` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `queue` varchar(255) NOT NULL,
+  `payload` longtext NOT NULL,
+  `attempts` tinyint(3) UNSIGNED NOT NULL,
+  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
+  `available_at` int(10) UNSIGNED NOT NULL,
+  `created_at` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_batches`
+--
+
+CREATE TABLE `job_batches` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `total_jobs` int(11) NOT NULL,
+  `pending_jobs` int(11) NOT NULL,
+  `failed_jobs` int(11) NOT NULL,
+  `failed_job_ids` longtext NOT NULL,
+  `options` mediumtext DEFAULT NULL,
+  `cancelled_at` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `finished_at` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '0001_01_01_000000_create_users_table', 1),
+(2, '0001_01_01_000001_create_cache_table', 1),
+(3, '0001_01_01_000002_create_jobs_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permission`
+--
+
+CREATE TABLE `permission` (
+  `id` int(191) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `groupby` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `permission`
+--
+
+INSERT INTO `permission` (`id`, `name`, `slug`, `groupby`, `created_at`, `updated_at`) VALUES
+(1, 'Dashboard', 'Dashboard', 0, '2024-06-28 04:52:11', '2024-06-28 04:52:11'),
+(2, 'User', 'User', 1, NULL, NULL),
+(3, 'Add User', 'Add User', 1, NULL, NULL),
+(4, 'Edit User', 'Edit User', 1, NULL, NULL),
+(5, 'Delete User', 'Delete User', 1, NULL, NULL),
+(6, 'Role', 'Role', 2, NULL, NULL),
+(7, 'Add Role', 'Add Role', 2, NULL, NULL),
+(8, 'Edit Role', 'Edit Role', 2, NULL, NULL),
+(9, 'Delete Role', 'Delete Role', 2, NULL, NULL),
+(10, 'Category', 'Category', 3, NULL, NULL),
+(11, 'Add Category', 'Add Category', 3, NULL, NULL),
+(12, 'Edit Category', 'Edit Category', 3, NULL, NULL),
+(13, 'Delete Category', 'Delete Category', 3, NULL, NULL),
+(14, 'Sub Category', 'Sub Category', 4, NULL, NULL),
+(15, 'Add Sub Category', 'Add Sub Category', 4, NULL, NULL),
+(16, 'Edit Sub Category', 'Edit Sub Category', 4, NULL, NULL),
+(17, 'Delete Sub Category', 'Delete Sub Category', 4, NULL, NULL),
+(18, 'Product', 'Product', 5, NULL, NULL),
+(19, 'Add Product', 'Add Product', 5, NULL, NULL),
+(20, 'Edit Product', 'Edit Product', 5, NULL, NULL),
+(21, 'Delete Product', 'Delete Product', 5, NULL, NULL),
+(22, 'Settings', 'Settings', 6, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permission_role`
+--
+
+CREATE TABLE `permission_role` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `permission_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `permission_role`
+--
+
+INSERT INTO `permission_role` (`id`, `role_id`, `permission_id`, `created_at`, `updated_at`) VALUES
+(1, 7, 1, '2024-06-28 06:29:08', '2024-06-28 06:29:08'),
+(2, 7, 2, '2024-06-28 06:29:08', '2024-06-28 06:29:08'),
+(3, 7, 6, '2024-06-28 06:29:08', '2024-06-28 06:29:08'),
+(4, 7, 8, '2024-06-28 06:29:08', '2024-06-28 06:29:08'),
+(5, 7, 10, '2024-06-28 06:29:08', '2024-06-28 06:29:08'),
+(20, 8, 1, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(21, 8, 2, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(22, 8, 3, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(23, 8, 4, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(24, 8, 5, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(25, 8, 6, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(26, 8, 7, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(27, 8, 8, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(28, 8, 9, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(29, 8, 10, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(30, 8, 11, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(31, 8, 12, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(32, 8, 13, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(33, 8, 22, '2024-06-28 07:04:27', '2024-06-28 07:04:27'),
+(112, 1, 1, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(113, 1, 2, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(114, 1, 3, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(115, 1, 4, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(116, 1, 5, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(117, 1, 6, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(118, 1, 7, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(119, 1, 8, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(120, 1, 9, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(121, 1, 10, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(122, 1, 11, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(123, 1, 12, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(124, 1, 13, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(125, 1, 14, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(126, 1, 15, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(127, 1, 16, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(128, 1, 17, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(129, 1, 18, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(130, 1, 19, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(131, 1, 20, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(132, 1, 21, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(133, 1, 22, '2024-06-28 16:21:08', '2024-06-28 16:21:08'),
+(161, 2, 1, '2024-06-28 16:53:31', '2024-06-28 16:53:31'),
+(162, 2, 2, '2024-06-28 16:53:31', '2024-06-28 16:53:31'),
+(163, 2, 6, '2024-06-28 16:53:31', '2024-06-28 16:53:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role`
+--
+
+CREATE TABLE `role` (
+  `id` int(191) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', '2024-06-27 18:40:54', '2024-06-27 19:29:02'),
+(2, 'User', '2024-06-27 18:42:29', '2024-06-27 19:29:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('0bGZQbsNUVRSaxlmtw5Se1DFqMLJHFFgBBmRJSKq', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWVE5MXZxMDJYVlE3UTZ0dmt1eGlYbGp6SklpRU1oc2pQRmVpT0VLayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611538),
+('0BWptxaXDX6Hz7UU7HPhY7xigk5pSphtgmiYreiu', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSGlKTlZ2UHl6QTY3eWtUNlBEQno2dXBMYTZoYUN6N29yVzJkTUdXWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611625),
+('0o1e5Dg2WDZ4VbL7eiVoGEsuXWzbOIcMCQfkc3Aq', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNUxDUTFwYXZZY1U1bEpYaXVpSXNUdVpDSDVGY1VsbVB4dG5tT3hDOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612839),
+('0UDsxouni5degjjesDXrMVsKYfc33EDydK61B10g', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYmczNEt1bzNGM3NvY25BU1d6M1Y0Y1RETjdkbUt2eWhtcmxVMTFjQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYW5lbC9yb2xlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1719615267),
+('0Zf8TTFEzw8zIkJt6R8m1Cqk86JbKEhRFTzqs25Y', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ291VEptWXNObjAzS09Pd2RzZ2pZTFNvaWVydzQ2bVVhRTBRNXNpaiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613810),
+('159E0lPIYrXpFThdr0l3AzvPn9g5luG4YKT2jnfE', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTmVDU1FPYmxva3k3WTZWdWJDdU5lVERPSnBDSHZWY1VkejBKMlJaNyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614145),
+('1tQqoyiaIFMlmpIHhwUNcmYYocKDYFGxcJDAxWwS', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoib0hnT0NSQUd3dG9xZDZ0UTlXeVZOYk1TNXV2MUYzV3Joa0VFZTA5ZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612611),
+('2j0N2aqAE1rQyl36STpdNwZfondbaJDVVyyY8W16', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSnlkSVo1Q3I3eDVNQzQ5bVp5NWZCZTFhSG01cGIzeDZFMHJDdFNmMyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611819),
+('2xJ4HqEOj7qdBR3U9HB5RhSkj9u8oXGOUId8Xx5b', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiR0FzeEpVWnZ3dE9rZHZCMVZmWFJDNXlLVHlFTnJzZHNHWWdnc2liNyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613924),
+('31JxnaY3QhA7G3fvrWeUbDFbsCiSsRT53t3hCyxW', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZkFzRDNYYllJRnlSZkwwZkhrNDg0YjdCZXZRWTVsdTUxSDZoQTVoYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611408),
+('3f4bIMJg4gAtZ6mPk2BqpfwyALcJlk22OidLCfqb', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiN1o2dm12OEV3bUVUb3pLdmFFZHc0N3l0bVdTb2o2QjJ3SjFrTmFFVSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611590),
+('4rfbHwWJ15swRadbEyqWJtndkkKT3w933130vYXP', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVElwWnhMalRHeXRZdVRZQ0MyTldBYWVJNjU4MU5QMUxXSW9ndG56VCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614091),
+('5UPs9gl0i94W817tqGzAlpACQkvvpz6AeyVxS39t', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibWhSa3FqNDdJQzQxM1g3ZUpXMXFwRXVsUnJDMUhqb2tvZ3dlUFFTNyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614093),
+('5zOsBgeU6Et8mrFCwFLzgwdvFmLutNGOEEfsiVUZ', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiN2R2NTQzZEJKY1RyaWZKMml2YnJZSkh0VUI1VVZ6TWpianBJemZNUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612470),
+('61biB1NQyIqjXlpfjsMV5Y4Tq7aTwth5ia7jvD6T', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZms4NGp0NEZBN0dvd0FKMk1aSkZheXpycko1VWduR3RjWm1Fd3FnViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614999),
+('6emk30SRAmWI8S0OUzPbmFXhtxRsYBxhO2kWuUHT', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRllDMndvTDNYZXUySTVobUNkbFhCUFZzOUhrMFFObGJkd0dUbTVnNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614564),
+('6qPiVTMZhmxlyGUDOCB0mR7tDA82tVD5PyFRAB1L', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaGdtWlJYbVR0d3dlSjNPUzBheXBwMnZpOFNNekxLRWE0MVdvazR5ZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614948),
+('6yhK256lQWTNMqn4Gqe6hBHwkRMkoZCe4gGdwNoN', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaVpPU1F0RkZLd3dOOXhwTHA2UmN6a21Xcm1Wc2c0bjJiQ2hsd2dReiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611405),
+('75sLDUl2ltmSQxSSfSHFH3B4tx7QOw4OwrnstizO', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiS1BnUlJGdjNDTENKUndxNTVwRGRPRWlyS1hEZEtYUEpDNlFtbktTWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614103),
+('7FDiSp0xlne5GQvKSr8dMZpFuBRWtyHANXNuPDdP', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiU0JkQXpGMm9EdWZRN1BQYU4xdVYxaUI1REhuQ0Q5TzVlOFEwV050eSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613105),
+('8lXOsr2hb2T2BUDdeuriXsZhjaP4Y5HYRumbFQtl', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTUtnbTJYQVp2T3o5dkVwenpDYWRWZmpadFZGMzB5bnliOVc2bnkxRCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612663),
+('8MyjvfZmg9OLjuLdb7k5HdiZT34hZloIOyMILG7q', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQWR0N3NGU0NNTEg0Z3hlN09PU3Q4TERMQ0wyeFFoQjNsZlczWHplWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611669),
+('939I5z3L6xGyTHf8Ae0rHYx0QG6ixuBeyEghoAiO', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRkpmbzMzc1dhRXowZ1lHVmNVOXFuOXpPWWVtbTJacEpUSWZRUGtPdSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612930),
+('97BIK0oF1YAYL5LuCTZhZwqwNYAGT5GCcHn08JIa', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQjRlRzIxajUwNmtveFhQcTQ1aGVuMTZaNHBNdzJkNlVoNlRodThRQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613049),
+('9bF9TcY1jSSFy1HVn7GA6two6yq6oN6Psh0io9lB', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieWNvSmEzS3NLZ1BJT2xqSUZrMG9OZTd5dVJrRDVJcHVMNkVPeW5BTSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613799),
+('9F2sPkP8QKs9flgywuMNgPtBBfmu61YYQFxVae6Y', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRzUzTmFKNG43ZHo1T3FKZlZvamtaTDZCWGlyRWRnRXppWFh2enppRCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614114),
+('9TteRUYPJglQQJjSjjlLj3HMf42mMd7fE50Vp4xo', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMFViY0Q4cHlhVFZvVWloakJ0QVoyWDRWZnV5QUJTYTIzWHpOQVlFMyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719615019),
+('9x7Pfyg1huUn0iEh1X6ZkdrdUEGY4JCQWHwuOkJ6', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQjZLYWJ4MTlrckw2T2ZTekVTdnQ4c1lhMHRDZnNZRFlSRFpiNkJETSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613643),
+('A812o0vHmQ6QnULMvZxf8JNoeexllwjt4mzV2CJc', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTDdSeTJrcjVBcnk1cEkwV2xBVE9TZm1vak1Ua2MzallRMXM2eEVGcCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612413),
+('apcsJ0U2kxMZWQ6o6CDjdT99grEvA6qHMmqfNDBy', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicUxBY1IzdjdjZUE3ZXh6bGw0WGpFSnlvUzRVcW5yd0dGYWZ6WDh4QSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612606),
+('AUhOp3popkaAA3WgrnQFlkr85Qghwpcax1XRxoyD', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZHFTVGZzODdoS0c5cHpaTzFUdXFyVUtYUklnWnlhNnhyT2RmRTd0YiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613826),
+('Aurej4X7905TpOXTPO5190nu9uruOBgjEogSu0Cd', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicjREV0hDUGlKS0V0YWl2Qk5GbUczbEs3UzhsWG1pbnI1Z0wwZDBaSSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611587),
+('aZfkAgImgP8oEowPtKMeO9oIIDx4V6aNWkovKIPK', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQk1vakltdmZOMExmdE42d05wVlIyV1dzZHlxaDZQT01ibmYyRTlEMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613071),
+('b3caMbsUoGoyMirOwK34LXo8sCvVS5NmvK8PlxIz', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ0t6UzdEM0ZMWjEwcjFxelFGTmg2RWF0N2RTSmZFNm9KNVhza3NvbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612966),
+('BdjdjJ18BGn0jy6gJBad2xgDUwBKKk8ceeH6rh1l', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNE9NeHE1NE0yUUxsY0RRdUdGY3ZEMkJqSE5LRlg5YXR4M0t6S0dkOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614160),
+('BONeUvk6NjoZtFcU9HHuBJszhQt5aOonoqPbe9XB', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieDVZZllFOVJIUmtlYWJDcTBSanBsb09ZQThqNjdVRmxBQmx3OTZRMCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612773),
+('C7AomWFkwwlACAC4pmazejg6oBD5Pn2axbUn9YSQ', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMmxVQWtBSnVZZGIzYlZaSFN0c0h1NDJhWG9INXh5T1FoT0s3djZ6QiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613125),
+('cdpqJejsluNld7Bh7QNiFMI2cZBr0kIF2iQJsmg4', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRFJMQU5uN2xzcGdId1ViTkUxWWNZcG9PcUFrdjd2NXM2enVYTTZmNSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613918),
+('CLaE8T5mjWHQvXZNa1IQpW0ekpeq1zbLOzi5TPBx', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRUhOd2NBTDBVNlZzUFhlbUtoUmlGMFNKMUpEakZzcTMxYnpFOWVPNiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613840),
+('cwhBc3vJacPMDMPDiUub8dEuGFGOtokcYSupQt3q', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicDBzcHdKYWJBVlJMZ3FXTDV3eWd1aUpWUm1QRHFudDN0M3lZU1drMyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612719),
+('CZrMWYyxShGkWvnuy9jikg837C2OJ7hFgmNFWvdP', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUEtkaldxeGJvRjJ6V0pZWUhJUDJ3YUsxckxnSEdNUm5KOURhVzlScSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613231),
+('d7JeqZeI1m3vXMaPWuYuASoOYWKXtbXZd8epqL5T', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZlA5V0VhdHhvakQ2QkR6WFYxYXNmTmxJOUFYSjllMDZQQmxaajcwYSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613151),
+('DEOddJG6d8yZ3L2VTfV8pxoPJyWM6wlldv0gSZqQ', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV2dvZGhyQkR5NXNnMzZleW5VVDZBSjBvdHZUWFNLd3dnWVJMWFFUdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613819),
+('DEuwywknS2ev6jim3CNw3TYL0hyZIAyuwTVvbwKw', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaWlKa1VtdjlWbHZNd2dPcWY3bU01Mm14QnQ4ZGJGNmEwclpJZUdqbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719615004),
+('Di0Zng0sIkfRNeJq6f2Mak8Rg5Kwt6RT8D7B1Fji', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieHVrOFFrY0o2SjFyQUE3ZzBGOUZ1WEpJQWhhYkF1YURtNXg4QlBWYyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614132),
+('DScvXydgL4iUQ9PYPgdh8yTmtlEx8fOmWVWcNibz', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWFZKdWdrRFBldmp5dm9KTUxNOHdSc1g5RmpsSHZ3MzZYbXd0V3NBbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613880),
+('dTORGU6j0kBIKPZyAR8GYIp1ZN4KSW846TQY7Yql', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUDRkRWpxSEYzVGUwaExZNmFmc3RRMHF6UDJsdDNJY2tZQzdCQjk5ZiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611525),
+('eHgBfE0nIacwJgO5DeFfGEu3bYAhMwcLvpCmBdKP', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicWpFYW1tZm11N2d1UUJDdGpnQWFlcTZsMHh0d1J6VE93SEM5OXN4aSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613816),
+('EpaFuylCYRpzWAbDWBuAVinv0lCOqn79KZJBxzS5', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSHh1TkVtbGFkV2ZVbDg4bENHZ29uZ2ZoUkV4eXcxcG13RW55TFhwdyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614962),
+('evdwSi0BxMewpGnY70QRIwD96Yg6CSADHIgYuqRs', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUXVaYzhtUnRJaGZwVUV2bDRJcjY5OTRBNzVzQTdvc0E0V0paYjVLUCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719615040),
+('f2Xj1Jpcua6qgxgeueHQt9oC3YZwUtIWgmNJsCmF', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiemNBWlBhZ1Uwb3p1WFl0cktDck9DUlp3MTZWZktLSW91eHBCVnNlbSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613143),
+('f62lGkuQm9Z1xZXGs3duuu7YrCWos369s0aC0xfh', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSGdnOXg0ZTZLd0pDTzZsVTJIb29lMXlOOGI1ZzlvWDk4cnFiUEdjbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613556),
+('fBbFgpEaiOJUhSGiQ45VuaSYVDbs1vD84tWTE6n0', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVDJNTkpQZWVwbklhY041dUswQll3T2tUM3lTUE44bkxSUGttdjBJdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612453),
+('FegNqc26aPsM0QT5EvqdEz4wmJod8ToaxC2pJSuw', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidkRwNXljMGpIMVpyS3JNU3A2MFFTV2tWa2tMYlhIQk1peGJpc09LMiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613300),
+('FErPF0sY8IMMNZzD5EoqGSGw8shGxIACkA7oX1Xc', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoic1VOVktIQ3d0bkthOUp1c1k5Q2tES3UwTDFQVXIybkZVcEwxeFFqTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614167),
+('fW1fKKbroVGeTH3M0k0Z9dLsbVBPPu6NvWcMI23J', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSmNMYzJNOEZzb0F4Vk5EY2l5c2tPU1NEb1kxZTdFVWdjNE1LZGtUZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611545),
+('FX4CKsg6TIh1fUqjNGF8WMQkzsJkJJ3LO6dJD1PT', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoielNaVUcxUXVDV0p6a1RSTVozVGl1bVlBTXdxbVZqN3RUMUZBdGVKOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611829),
+('G563DDFBgPJRMvc5fFAnGR9Jo8qu55tOrYvlY7ms', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNXU4OFdRaUtBb21tRmhoVnlqM0tuUU4yd0FGZW5MY3duRmdyZFl0ZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613675),
+('GbdfAkGab2MyY6Ni0jaA6U8F4wTYFmvJQraBNB5O', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVTFYalcyVUtvdTd6RmNWY0pZRGJQc1hoYVdCTTRwRnh3SEZVd2w1QSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614182),
+('gEgNrsktjnKdvi0UAMOyiURwhb4oQXVROmlQxJER', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQlk1UnZxVklONVhJQjB1dkdmV25ua3JMR015VG9VeEJrbnVHamxhUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614561),
+('GGNUNWAQedj8g7ZhD1YKPMR3R6LzTt5xHrsBWwCM', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYjFzb2NaN3NTUjhFNnQyNEp0VkZoWkFDWjAzOVh3TGFOd0NwdnNHNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612916),
+('GTRh7wL0ZuL0SCSw09uaA1dLvkzmAA7mPSoilLSj', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOTV3TlRIT2c3QnhMd1hxaDZxWmNhd3czUW9QTTB5V080RWtZRENaMiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612933),
+('Gw57AaRUQZ3hmRC3b1EniPTQ2fkUSwimmOfDLJ8t', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVWpSWUVDTFhGdkkxcWlqY3BxZmFhbnptb3ZHZUh4NEoyQVc3SW9taSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613121),
+('GZOeFr6YQNzhtfNv2tSAEpJ5GZEGwVVKO3NrsvYS', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUFF0SnRUa2RPZGcyODhOalJFUGdmZG9Ea3d1VkxwRkNoc043Z0FBUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612699),
+('h9bePrpS2txA7VVPWWnAUIylFWqbZwGdgMndfvRB', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYTM2ZUpkM2ZnY3RDYTNDVzhxR2lsckVqTVN5ZU9NaGJhazVjUWFMTCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612428),
+('hBgRhdA7axvOcmBvDixac0nYqJ25OAUWTcpM8YSX', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTW01Tjd4ajkyMFdqZ1pKUFNJTnZUVXV6Tk5wTlI2MHZwTkJjYm9DUSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614201),
+('hH4jlqp2n89l3pwJ8rOB5fx5NlMVugi3wZoNuOAI', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicG42dkhUdVJ0bXdXUFNrVEFYSEJoRVptdGNNc0xQNktPdzNJTW1iRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613195),
+('HreYSMlhDd7VJnNjzmb8gEkDMEw3po2Kg0J1odf1', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYUsxb2VwSDF4eXVkZ2k3eVgxV0RleGxZeWlCelpoU2RwS1pHMk5hMSI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozMjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3BhbmVsL3JvbGUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719615258),
+('HtQtskFPksEQkVnlzdLgi2nZmDIpG4pcfYd3jXrz', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNWtxbTkxMG5FaEdRUFhSUndMVWJqcjVDSFV5clJXa0xuRm91TnpsSyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613657),
+('IbBTXWGqD6HmRGRrvIpOGWoFjfaz2VpQ1niQm6fn', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQTc2bjdxVEJWcHF4WXhqcFNpR3A1TmpYTHRIZm9menFZZEphb3FQTCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611826),
+('IEQpnItMny8g4TAKJ8Az72dtFScs36bnTgCkiqYo', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSXRId3ZNNjFpUGtOVHJjNFBLS0pnQVJsU3lKVUpveEM4enlvTEhOayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612345),
+('IJgYjdwIhVzYTspXb3z41VGxCukj7WuXPOv9HDZH', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibjd3R0x0SFZSSDNBV0dmQWlhMnd6ZjJScE1EbGU2bFY1UnpvdlFBTyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613109),
+('IKQbtDwt5GPN3PPzR4nIPxiHTz0VcV4QQWcCMmGQ', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidWwxdmhLbkxVeFNHSGEzUkhucVNGNXVKN21zakxRRWJqenoyd2EyVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613191),
+('iN5wA6cPCtVals7w3eXUzBHSV4dEX75D0fWXMtWD', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVkl0U1l0b0syYndMem04R0NaWDVPajFVbzMwT2dmbEdpanJmakhLdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614549),
+('J1LUZVnZin83GdQVXlHl0B7vnpC8vF7uEkfobECm', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOVZicG5DS2NmOGpsUW54NzY4cjZ4STdzMXJIYVhCVmVyTUUwbTJiUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613390),
+('J2lQwA3czBaYlgaK9iBtwbd91hEfRtkWygcntWLq', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMUJCYUJhNEhZNEJ4MnUxNTd0aUZYMnFRaUhaR2htRGN1cjk2VW5kaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613837),
+('JVNngq5oVsQ4cemTG0mtk550CyUB3BIaBKBC5PlG', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNlhWeG9BMEVmYks4WTZPc1hZYjBEdXduc0hNeTU3ZXVGRjhES2VIdSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611824),
+('kdfpOqIaHmP0EFr2ts5Hd2EPZVopwnlhECmjWSQ5', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaHR2d2lpUzRKdWI5eHJQMnpmdGE4dnJ1TnphNnJxTk1qVm1ObXRiNiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614513),
+('krDQiycbkcicVQjJXc9fqgYS6ty60K8pvhb9DbmE', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicnNkcWNZSkU4Z3U2OGNqOXc0ZEQ2azVHSDZVM2IwbjdlTm40dkVBbyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612940),
+('l4htGGLIpEko7Np4Zgm7jH7GBPlE5BJIgGWG4kL7', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQXBtejlSVFJic21TRXd2SWpWdzY3a0VCamdoOVExeDJLRGRJQU16WSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611543),
+('LF7VX2BXeoO6QlEm8YwszoySply0ROBWYKcl1O1g', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiamF6OXdRNDNDdGk4OGtVZXhsOHBEQXNaMXppYzg4TFl3NmxETzF3eSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613677),
+('LiDN626SukkVkcXBsudrNk71nlmo29mmI2cedR2T', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNEE1YUo4RTRFaE5RMlU0VEpXOFNGaHByMHV1R3dTdVpDUGxRc3pWWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611628),
+('LjI79N0DrhvGkSwFudcl9qNaf4UG3AXaTDJmKFZN', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRWpFclZtaVQ4a0tWcVkxakdrRVBZcWxqNjNqZFJUZzZKaGFjb05WWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612405),
+('LPHiV8buKVoKPHO2b7lmxdMnfYUQ7ys0yKm6JFKy', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRmNYWWJmR3ZXaGp2WkJpSTM1bXdqSnkwdjR2RVhrUE1FbXVscGVsQSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611355),
+('Lyio5xbdh4WTpPub5H9v1CZf4DT0f7tHpJuaPsz6', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUHd5elBvUUR5aFhJQkRmZlZlbFI5RzFqcDlqZEl0S00wMmwxSk1ObyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613885),
+('Mj6h5yLTAcXA4Y2gQoKScF6OQCtyIpbeXix0htQU', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZllrSEhFZmx2R2dPcElMZHFGaTZnbFZacWxyNlJwS0xOVnZkb3E3dSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612716),
+('MWNrrJFDvH6scFk32812RHihi84yHtKvesDfyB3F', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ2hHRHc0eGtLTE1MazVCeGRxNEFHSDRSR1drejcwWVlybXhvZ1ZrcyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611755),
+('myy08pWSgncqNRCcPH8tJYmXDfBWLg1G9hZfJ4X3', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieWtMVUVwTVl1QTdKRWtmcWp2c1JlVUhnbWhvZW9NRUNUbGIxcm81ayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612978),
+('Mzah66O1Q9ssSByleb2wWH3nVNG5qPcay5XZSiJw', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQWRUQlQ5M21BRW9FcnE0d2JqMURyajhSN3FjSjFkMm92ekdJbFlJayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612674),
+('n0m9KGlowb3HPj480XyPSq2dSy9tDYJ712zcLw0E', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSkE4ODFGWEpKbHJRNk5CMHRDck5CaXRaNnRCZDZiVU1abnBsU0ZmSSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719615053),
+('n764Im1VcoIcBfjnbgAhOMdn6Mg6bjilZCR35uFw', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUjJuSzlMZklFOFVQSXgxcXFiQ0NFbGRNVklXdk1VTVVuVnA3d0lmdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612474),
+('Nbqwj2Y4d5cjiIYsI8AkmY71EDwuhI6VsPotzGbt', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWGFyZG1jREZxRnJlNmU2Yk91QlMxVXhLVDFSUE83WlRPYWxMYWx1diI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611674),
+('nHOGErIALVFxHWfsZjHdHrK3liMLdAep92ZvNu88', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTGpxZTloTWN6VXdiOXNtOVk5MFBVZm5YckhvTm5wYk9jc2dlS2tXeCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613026),
+('NukhLNHOshEfraUsTGjQNiVs2SqzwHPzmRtkEYat', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiME1WeFlOVm1KZEZFQk9vemJEemtwd2JZS2p3aGpCc01EZDhQeThrViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611821),
+('NXvOWXHJ9M09NNn8MmQndGpaIcqkHbjTDkyrOSwB', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNUp6eWszWWZRbTlqMVRnb3VFT0loSkVBOEpzUk0xZEw2MFhjMkphZyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611725),
+('odRTCG07yoyJeyAvAutnBhXIh2FPIiWoZD0nDqsB', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOXlERHkwUUczYUxseTVSU0RNUm5BSVFPd1BBSkY2YXpXWUZxaTBLVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612957),
+('oeL4nhyuaV7RHstjfAo6GQkBAIwjxFA8jv5piP6F', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWlhjam5KYURSQ0E5cHBkNm5hSFJUb3lKSllZcXA1WVJRT1ZFdjRDMiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611632),
+('OKpxywbX2pxEZVQSRXS3lGvMiVukWEk388FWYTAu', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibXFkNno1YllqU3FEZUluVlNaeGpLR2lwdzNVajhoczdiZHVYODJMdSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611399),
+('OTUUd2c2MiVt3XXTGBSkLyrvanRn7mCNrzmlkmFJ', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYWg5RW9RaUdCTVVoQ2RIRHFZemRxNk10Q0hWNUwzb1ZJSnJyaEJqbyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612981),
+('P8rIF9qPCBoadkx8LFy20CFrspKGIrvyOADWKEBA', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWkU2RDhnMXYzUFpvWXViRExUeUtIUkhFYlk3alJEd1dSSGVCaEFUYyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611402),
+('p9T4OFQFQ9UUbI6rxlVjIL4z5Uslq7yzBJL1T3pX', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiU0lUbDNUd0o5WWhocU5CbmlKa2ZZNDdrTWRIclZQUWNDVmRCdWRDZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614085),
+('Pb0vqf86BVuC4Klqt0AIU6pZRxx46L4ky8IkpH57', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV2cyS1U3Yk5MTUh5YndnQlVXWEswZU1QMjd3ZmJNYTk2amwyaGR6TyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613795),
+('pM99Q6HyX2cPXO9rk2SUD2sZr0ZBxbS1TtOg0gHK', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZFoxMGFjWkcwUlNRRlBlajJmUlAzclVzWU5XQXlrSVZyaXhhVzFmZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613560),
+('Pn28QBGVbPIKoemWsUxonS26OW9tcoFs0MYDEpjM', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiM1RQbUJkVHlERE9CNmtUMGVxUjBFUFFmZTNXdG1lTkFlR1h3S093NyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613297),
+('pVNc6ByBIdgo2tPDqIFkGKbUvchF5gA5KPeIy1zf', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiS1RRWjU4UlVDVE5BVzJmZU9pZkVKRktnd1V2TFV2c004RDJpQzhEZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611583),
+('PvYC7CQuXBB9mBlNoUbqTtxH4hjYutYQlDZ0pj7J', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiU25yQkdrZkFuRnVETWV2QXdRZGFDWWJyWUl6bkZiQk9aUEJCeDhEaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611779),
+('pYKoeIshGNGH6tHq9qK5GbFrZrxIjajc79FZQeAF', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidDFBWW81V2daNHFZaDdYSTN2bzBRcjZRMUwyVWhscUJsOHVCeEZEZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611640),
+('QDPk2ILgVLAOycdHZbzN8qaaNy41uYF47yGlpUGJ', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicEROTWU0cjBSaDhHSkJkVWhlMWRUTlpEeVBuTUlkWkM4UUEwc21ROSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612826),
+('qiXiN39GvFRLeGedQzz1fGKGw1GLwWXWv0jwVECE', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaHV2NG1YcUdsajhOdzJtMnlyWmtOR3FkYzZkblY0ZnI5OVh5NDNsVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613848),
+('qNcLHhGA6aKTIqu5KmuHbERJ2mz8CxHtm1oxSecW', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUVpZZWFxRmJqVlVLMHdBM0dYcEc5YklhVDJQdjRsT1czWXZKbE52bCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612668),
+('qOkGgDKOpidW6DVOWvPVQF27av1YR6ZYZANsewEy', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTU5oSUxrTVA4ZDN2YjVCQm4yTUJ6WEQ3YlZrZ283SDNFN0tncDBBciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613590),
+('QqGYjYk0uIADebjzYyeaC8bqXfoUeBjy0bqmL31U', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiemwwd1A0MUEyUklWWjhrS0JrVGdVZ09CYUZOY0t2aXR2anIzdTFHUyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613021),
+('qSzDFLgKUS3gR9mU3Qd5GUoJyudie6KB2edMyEnI', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTU03QTh0OW1CUnFLQVYxbDdSMnRnaDhoOVZxeVd3Ykd1NVVEeEdGRiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612920),
+('qWEKAwJugLPuI0LLbcDMGoWp7ovtcbKPgJUsCMLw', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoid3J2MnZQTjhsSTZMNVg0Umh3RTF0ZW5GTnVFQVpnZkFjVVVWTXJxdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612487),
+('QWRuu1vUqwh5EmjLfHHHbjumKU6wzJj6iXKprqpY', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWW5HanVNUlJFbVNNb29JaVRXZ013czcyNTBmMHpRWFBZSmh4VXh0aiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613569),
+('r4NRVyzWos08pCVStOYwWNUtRXvSa6tBLbGtpyRe', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSmlIbm9LUUpRY2cwUXhWYjBoRmQ0WDNZRVROcmY2Uzl1dFZiUXBEdCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614540),
+('RaZXfFpbcKWkhqyt2nzXM7sQgnh4oDiDLXisYgA3', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWTBkUWZDN0xESWFYR1pCNE9VbVh6Sm84YWY2bndLREdiQ3NPM1FQeiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611396),
+('rHEAFtXu2HUweXUU6YRqkrMqnsGLdT3uhU6so8Vx', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibGFNWm1RTWhpYUZTT3k2Z01JR3l1NTZxTzhsNk9OajNNUmxtZXJsaSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614173),
+('Rt8Hd9fHGcKzD1kdWUd0LqA52ZU6ApivJF6qGIqk', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMEpFSXNJeWxrMmptdXl5NVdvOHhmd1R1OXNrWjB0MWQwcEZvUnNDdCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612984),
+('RupMicZWTCMvtMMOS05beww3uB8dpmi409q5XwAj', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQzl3RnNodVlMWTdUak51VnpVT0JzbnFpVW85ZTRuaURrTGRXMHVZdyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612385),
+('rXlFkE0uKilfEQvSvLBu07VL2QQeOUp8ti3GY2mH', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUHp6TU04SHlpeVNNSHNEYmlmeWxFTmwxMFp1OHQ1aHNGY0pMcmg5TSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719615006),
+('s1olfbidy01CqRM8wZENmQizLF8jZWl7FBnRiph2', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV1RiTmgxVjlZWFNBSHRsM01uNXdnSkxyWEdKYmJ1a0xEZVlTQXZpNiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611534),
+('sC0zt5GsbKgaciDHPPklWNNVTbAvoYSHsTrxWgDI', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiY1JwSzNnbGVSZFF6WjNpUjFudVVaQzVlNURQaWtVbmJsVVRQcHl3eSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614547),
+('sg4zyCP3mtpg1a2g7qoz8iiasNko0PGjYiVfh5AT', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTXFEZzlPbElVaEM5Wjh4S2FxWmpYbjRDcDVTTjRBSUMzZUVxMTRVYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612777),
+('sH9yoqvcIfWgIjwTRrL997Y7v618lEUJPu74SpUE', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicXFGZDR4MWM2N3RIYnk1ZGZrYzdDVjdpUmY3bGdoV0p5Q2JjUm1MZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611694),
+('sJ35BNr4eMTBCvZaWUxdEgTKB1f38kjNAJHq59pi', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUW1Ma25pMDZ4M1VmTXlHenRXb3FiYlJFMFJPQUZRRm8zbm9jM0RZOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612706),
+('SPhS0n8d9QNg05gnr1obvqGmJRgz6pr6hbH2Ek3E', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV0FjYkJvNVBrNWlqbDkydURRZ1hJZlQyd3ZZVFBTcTVvS2czZkplTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612834),
+('sq0MZZkfhJd0Fm5uRDZUA6kdQXkivGz3Wa9grZXO', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWHJtM2dneHBBbENzbHJJcmdEbzQ0WDFtOENOSk94N0V4OXd2djhpTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611717),
+('SVmxyHbFJMUznjaHuN1QMqnFPIv6gkPd3MMSwvY5', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidVVnMkZqdTRKdkZ2NTJnT1B6V3RkT0k5bDFZT0JSRE1mc0NLb21LRCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614543),
+('T8NFi99JpFwXxOtzAJDAtYcNyfC0WwtYOcmJdQ7H', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYzRMZjhVdTBLMjZvbEYwVGRxMlQzR2lEOU50VnJnd21UaktqMG1OVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613647),
+('tiU9xQFiI9y84ZsothRI4HkUPePhDem4tBlD34sl', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibG1UVTBJTHVoMUd3SnNucDV5cExFREs4R3I1OFlxemhtckdlRjZ5dSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613081),
+('tXb4RS7e2aqmaKxbBwk385luBZkeEw3brp3L4aUU', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicTlROHlpOE9lRmxqaG9wMk1wMFJqcDQ0SXV2Y05JbHltVVdpQTZ2eiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614194),
+('u5xiznq7vSF9ztoTB2xjCwruppr4rozdh43dLxel', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQnNQREJ1bkY3cUhHbTI4QnpxMHFTVTNLN0VvU0RpUDc2Q0xhM1ZMNSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611816),
+('U7MvFOlaQPT8s9qXxZ4LQgsAlBVfVbSShx2bfTmH', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSU9INmRWTFA5MlpDS3A3R3BOY2ljdFEyQmk0ckhVTUtjbTF0WnhyNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613639),
+('uqT7l07vWShDKYIFS7V1mA3mXiaZv3bveyPpIsAh', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibkVLSDJCajc2bFBzbHF5Uk1KbHY1ZFptTnFZd2pIZFJWczR6NlJScSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611528),
+('Uvh7LRzSvhHZiqyOFtt9Seg0zNBgEofx4E0AmY91', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUENPWWtvSE5XTEhScjF2UXFsZjBVem9laVlSQnozREkxZE9tNUxtUyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614124),
+('UyX9jss0HiEH0tnngl1vWM8rJWlK9BkWZ8Bzzquf', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiR2M5UGRETG9OUzFLV0I4UGlURElVOEhGcUxEb2FSMjlSSGRPeFY3WCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612686),
+('v0Lx7hPZ5Jkbmqi9NSjsl2mDE9BUEOSitRPyWc2V', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVm1BSmZ6bXc0Q25HSDFJYlhhWXRMUmU5MjdBV3AwU0RKTjhQaUdlUCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612846),
+('V2a6K3jQWQK0gwIugmL7TAEV5buevECZOECyvg6W', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWHJDc2JwS1BsaURxbWVob2FYZmJ3eEtQN3NhaFcxaVFkYzVFRU9iNSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613377),
+('v2A8oIl9vZMoP4vAOJmw2qnu4ui7xFvfopdaT7Oj', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVWxzMHVlMk9DRnUwWm9WNVVSWDFpdnpTcjcwWGNBMWNtdkF6ODc5RSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614964),
+('vBbkNOUVVqOOCURKHbzYfsiFg6bMD4wAlPeH8Pgt', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQldyMEdLYW9uYXZDZDFWRjh6ODF6WEcyOUpNUDlWZEVkbnBGNW1EMiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612924),
+('Vdr5IzFKZRnYqEzg5ttoAI7yAq0VTNKXbRXYUepB', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQTh3NnIxclUwaEF6YW51SmpVUzZjanFxdm5yNTZPeTlQV2ROdjRveiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611834),
+('vEDlOaZSw5yfZmaEu0JrUR8ek8fkV7VXPNN7iE46', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRW0wZnVwU1FpVlRUNWVySHhsWkxwSGg1WEdCWWg1OFU1aFR1QUM4TSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613234),
+('vIVbNXdtHDNycLZ9LPssXbrk1Q9fn4d7z47GXFOj', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNWlUYXc2VmdWVXRSdXc4YUV4aXpJbDZsdnZvcE1OUE53ak9VRlhKMiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612421),
+('VKlrsIv7QykJWLwexdTpz30449KiMTXVTnajLQUv', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTTZBR3lDSkZ3M3RiSlAzVk1YR3RVNUF5N01FR2c5T0Q2eHJCeFlLdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719615001),
+('voQebdzo2i0uMJLKS1SNLvk2SYH2hroXuNEdWzOO', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiY0U5OW5UaXhPa2FWb1paallPWkFybTNzbjZaMXpOY0JVS2U2R0RmdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611359),
+('VUlMKFdB35ZlH9QoQZ7gLgJFm2yj3MQnEU0tGwye', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUnU1TTA1MGhlU2liRkprandqejVYdTVwaTYyQ3JOS29GMEdtSUJ4ZiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613672),
+('w2AdE3K8kREQDTCaSmRkiBVDXiHSvjNR6EyGCQfS', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRDN3Rk5heG04MWx0ZWo5MHRSaFNHV25BWExwOG1lczlPRW52UU1YTyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612481),
+('w3dpvYl8JeiM3azQjC2NQlzmkAjgVb2SwothQJwz', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTjdDSTlWTXFuR0I4RzNnbWgydGVRNkY5M01Kbk9LMFdUbHNKTmVWWSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613632),
+('wgZKDOnhYGByBfnkNZAntJOOf56ou5YEHWhEThkw', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUkYzTzA4RGRYeDdkVGh1RVJ6Z1FQV1FIRXVPcWNabGlkZENrSThMdCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613842),
+('WlDtN2Uv5oxnhmIHOjqyXF5gxq5aa8dfnhmjLx4W', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQW9Rc05PU0YydDIwRlFDNVkwaDRqQVF5czhQM0xBZDR5SjVGOXBQaiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612805),
+('WRZMCYAXPrWBcQWgSpwjKQ66sX6MesQY8gYMu8oV', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiam1pOHR2RnVEUDhWeDdyTUdLV0lqd2NxcEZpT2J5THM2cVljV0Y3MSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613932),
+('WYh63UAUatjd4r12nKDxjsa6eVhQdtluyHRU9y7g', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoialdsV01HakF6Y3BjcHgxcW9zRTZMVzJuTmdCYnRLdlNZSEhtWkZhciI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613107),
+('x0hJo38HhgBRaUYdWzNXfSffwvl9Q8zjmb6lO3u3', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQjFYVFR2c2dLNlFwcjRzVE5CbndJRmNteWFablhycHAxb1pQRDdDRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614078),
+('XCW7UjFvo0Qy2OE9tUam6JLROFRt4Wq9ghPSN5Mz', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQVQybmxhMUV1bTZKdGpMV1RadHJRbDlwSENwUmNXTGFldHdLNkJaQyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612448),
+('xCywC4tsuxDWsLGpA1ZRXgea9vOjEJM0rE4SoNVz', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ21LckZ1VzVwejM4anRTaWJBQk9YVzlBMzdNaTRSUUhQU3o4Y090ZyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612831),
+('XIdlNL3WGyQwRKM0yKiLKkAD0A7D9vbJkljNrGqs', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTG9wT3ZBNDQwM05UVGtrN29PWkNnU1poSE5HY3kyM3dVOWhFM2F6WCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611831),
+('xngXloXVZY3WMXSGFcy8n1SbrEKobP1iGKuOE1LD', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWWF0TkxmTXFaRmdnT01KWUlLU3cxVWdMWTQxWm91QnFiTmdBQWhpayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614142),
+('y5sbvnkxd0gFTELJ5BZ9bWrZm5E64SMcCHWDkEap', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOXFQS0dGbTY4M3dPT2hjR1o5MEtqTHdWNUJiRm81NTVDUEdES3J0bSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719615012),
+('YAp9hGBpECeG6zb37AS3vD7bszwNc73jw30zYUDN', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSmlBUEFiU0dGdU5SNTYzZVR4Z0t4aTRJYW9UbWZhcTM0OXNWRGRNTCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613806),
+('ynf4Zb0c44TSWkZNk193LrGlMoENVSDvhcWXRiZL', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaHFTaUVER2Y1U3ZES2NUWmJoRzIwdGIxaERCcEI2WjZ5Wk1vU0R4QyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614098),
+('YO4MyxH8k5uCzhc0JySJAG1lgvRi7Ml4C7GiRJ2B', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSXJkTndPSWFidVRCYmtxZ0w5TUpxck9aZUpKdjJUWHJNcnl5SmNONyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719614993),
+('Yxt6YCcHoR20lZA1Xwp96vIi3AVlq3FNvnirYvO6', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVjh1Z3dkWnlaQmFnVkUyaWNhRFRrTXhPRnQzZDRxWVdnTU5OOVZWYSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719611698),
+('Z2pXGI5Vpis7zKlyWkrW8zfq0enbjTYMmLghpRyL', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiU3locFhLdEhhRnkwVXBUdkhwamJHNk4zd2QxMlFvc3BUNWRIcUk0RyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613650),
+('ZBBuH7tEvbBhVbTZxsqvNR1BwE7l5IydGceMakMt', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiamZNUjJwQTdreHlFbzdVeHBlMDhPMkY2NVE1V05ud25FNmhyaDQ2VyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613874),
+('Zv1QbXRSzwxG0CnYC3kHDnyw772ik8ehKenVGbZo', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT0ZHUjliRUFoOHBOYUNJUkFMZjhsTVBxNzdLeGhMTERkOWY2VWdrMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613822),
+('ZwMzbHF4U7Jd12dIgTzBwiAXM7tEL34HmNC2cAJY', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWDV3eWFkUEVMclQxZmVGN2Q2VURxZ3dJSm16VXZ2UVRuNWs5M2ZuMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719613073);
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('ZZQ6Pu5ps58BMKLTSZ6V8jiK29ZrK2PDZkmCdDrg', NULL, NULL, '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWktPTUdkd2FzN0N4TkswUnVTenBBQ0g2c3l3N3hXNmQ1N1F0S0lnRiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODoiaHR0cDovLzoiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1719612656);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `role_id`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@gmail.com', 1, NULL, '$2y$12$rg5oOy7yA1m.5iBNGsO6z.KqYRJh/E5.KmHsMnZvLbdPfulgi14ei', 'vkEg1CYdxEHuNozEFY84WWl1f29zR5f8aXKNMHMApSdSwBu7WI0aJETF4Vxs', '2024-06-27 23:04:23', '2024-06-27 17:05:19'),
+(2, 'user', 'user@gmail.com', 2, NULL, '$2y$12$V23ebjd9IzO42elrLpcPdOiJ8.ewEO3eoiBIjCkEq0psIgt1MMMzC', NULL, '2024-06-28 13:38:56', '2024-06-28 15:44:26');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cache`
+--
+ALTER TABLE `cache`
+  ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `cache_locks`
+--
+ALTER TABLE `cache_locks`
+  ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_queue_index` (`queue`);
+
+--
+-- Indexes for table `job_batches`
+--
+ALTER TABLE `job_batches`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `permission`
+--
+ALTER TABLE `permission`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `permission_role`
+--
+ALTER TABLE `permission_role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `permission`
+--
+ALTER TABLE `permission`
+  MODIFY `id` int(191) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `permission_role`
+--
+ALTER TABLE `permission_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+
+--
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(191) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
